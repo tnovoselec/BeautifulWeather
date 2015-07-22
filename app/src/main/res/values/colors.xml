@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFF</color>
+    <color name="morning_bg">#E3BB88</color>
+    <color name="day_bg">#D89864</color>
+    <color name="evening_bg">#B1695A</color>
+    <color name="night_bg">#644749</color>
+</resources>

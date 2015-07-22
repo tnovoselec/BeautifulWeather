@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <com.tnovoselec.beautifulweather.ui.view.DaySectionView
+        android:id="@+id/morning_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true">
+
+    </com.tnovoselec.beautifulweather.ui.view.DaySectionView>
+
+    <com.tnovoselec.beautifulweather.ui.view.DaySectionView
+        android:id="@+id/day_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true">
+
+    </com.tnovoselec.beautifulweather.ui.view.DaySectionView>
+
+    <com.tnovoselec.beautifulweather.ui.view.DaySectionView
+        android:id="@+id/evening_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true">
+
+    </com.tnovoselec.beautifulweather.ui.view.DaySectionView>
+
+    <com.tnovoselec.beautifulweather.ui.view.DaySectionView
+        android:id="@+id/night_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true">
+
+    </com.tnovoselec.beautifulweather.ui.view.DaySectionView>
+
+</RelativeLayout>
