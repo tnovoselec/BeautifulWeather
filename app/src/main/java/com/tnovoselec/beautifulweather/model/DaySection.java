@@ -1,7 +1,7 @@
 package com.tnovoselec.beautifulweather.model;
 
 public enum DaySection {
-    MORNING("Morning"), DAY("Day"), EVENING("Evening"), NIGHT("Night");
+    MORNING("MORNING"), DAY("DAY"), EVENING("EVENING"), NIGHT("NIGHT");
 
     private String description;
 

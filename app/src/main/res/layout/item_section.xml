@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,10 +17,13 @@
             android:layout_height="match_parent"
             android:layout_weight="3">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@mipmap/ic_launcher" />
+            <com.tnovoselec.beautifulweather.ui.view.SunView
+                android:id="@+id/day_section_icon"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@android:color/transparent"
+                app:isStatic="false"
+                app:strokeColor="#FFF"/>
         </LinearLayout>
 
         <LinearLayout
@@ -30,42 +36,51 @@
                 android:id="@+id/day_section_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:textColor="@color/white"
-                tools:text="Morning" />
+                android:layout_marginBottom="2dp"
+                android:textColor="#EED6B7"
+                android:textSize="20sp"
+                tools:text="MORNING"/>
 
             <TextView
                 android:id="@+id/day_section_temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/temperature_size"
-                tools:text="-1 C" />
-
-            <TextView
-                android:id="@+id/day_section_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:textColor="@color/white"
-                android:textSize="@dimen/temperature_size"
-                tools:text="Sunny" />
+                android:textSize="26dp"
+                tools:text="-1 C"/>
 
-            <TextView
-                android:id="@+id/day_section_wind"
+            <LinearLayout
+                android:id="@+id/animation_data_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/medium_size"
-                tools:text="Wind: E 7 mph" />
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/day_section_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                    android:textColor="@color/white"
+                    android:textSize="22dp"
+                    tools:text="Sunny"/>
 
-            <TextView
-                android:id="@+id/day_section_humidity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/medium_size"
-                tools:text="Humidity: 76%" />
+                <TextView
+                    android:id="@+id/day_section_wind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    tools:text="Wind: E 7 mph"/>
+
+                <TextView
+                    android:id="@+id/day_section_humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    tools:text="Humidity: 76%"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <!--View
