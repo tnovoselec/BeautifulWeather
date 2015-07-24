@@ -40,7 +40,7 @@ public class DaySectionView extends LinearLayout {
   TextView humidity;
 
   @Bind(R.id.day_section_icon)
-  View icon;
+  WeatherIconView icon;
 
   @Bind(R.id.animation_data_container)
   View animationDataContainer;
@@ -91,6 +91,7 @@ public class DaySectionView extends LinearLayout {
     this.wind.setText("Wind: E " + daySectionData.getWind());
     this.humidity.setText("Humidity: " + daySectionData.getHumidity());
     this.setBackgroundColor(getResources().getColor(daySectionData.getBackground()));
+    this.icon.setIconViewEnum(daySectionData.getIconViewEnum());
   }
 
   public void hideIcon() {

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="SunView">
+    <declare-styleable name="WeatherIconView">
         <attr name="isStatic" format="boolean" />
         <attr name="strokeColor" format="color" />
         <attr name="bgColor" format="color" />
+
     </declare-styleable>
 
 </resources>
