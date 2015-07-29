@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.tnovoselec.beautifulweather.api.WeatherService;
 import com.tnovoselec.beautifulweather.mock.MockDataProvider;
 import com.tnovoselec.beautifulweather.ui.SectionChoreographer;
 import com.tnovoselec.beautifulweather.ui.view.DaySectionView;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.night_view)
     DaySectionView nightView;
+
+    WeatherService weatherService = WeatherService.getInstance();
 
     private SectionChoreographer sectionChoreographer;
 
