@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tnovoselec.beautifulweather.api.WeatherService;
+import com.tnovoselec.beautifulweather.business.LocationDealer;
 import com.tnovoselec.beautifulweather.business.ModelConverter;
 import com.tnovoselec.beautifulweather.model.DaySectionData;
 import com.tnovoselec.beautifulweather.ui.SectionChoreographer;
@@ -18,8 +19,10 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +41,11 @@ public class MainActivity extends AppCompatActivity {
   @Bind(R.id.fourth_view)
   DaySectionView fourthView;
 
-  WeatherService weatherService = WeatherService.getInstance();
+  private WeatherService weatherService = WeatherService.getInstance();
+
+  private LocationDealer locationDealer = LocationDealer.getInstance();
+
+  private CompositeSubscription subscriptions = new CompositeSubscription();
 
   private SectionChoreographer sectionChoreographer;
 
@@ -51,14 +58,20 @@ public class MainActivity extends AppCompatActivity {
     getData();
   }
 
+
   private void getData() {
-//    LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
-//    Location location = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-    weatherService.getForecast(40.7, -74)
-        .map(ModelConverter::fromHourlyForecast)
+    Subscription subscription = locationDealer.getLastKnownLocationObservable()
+        .flatMap(location -> weatherService.getForecast(location.getLatitude(), location.getLongitude())).map(ModelConverter::fromHourlyForecast)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(MainActivity.this::fillData, Throwable::printStackTrace);
+    subscriptions.add(subscription);
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    subscriptions.unsubscribe();
   }
 
   private void fillData(List<DaySectionData> daySectionDatas) {

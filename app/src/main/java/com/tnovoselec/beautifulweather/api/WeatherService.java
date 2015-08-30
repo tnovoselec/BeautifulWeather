@@ -1,5 +1,7 @@
 package com.tnovoselec.beautifulweather.api;
 
+import android.util.Log;
+
 import com.tnovoselec.beautifulweather.api.model.HourlyForecast;
 
 import retrofit.RestAdapter;
@@ -25,6 +27,7 @@ public class WeatherService {
   }
 
   public Observable<HourlyForecast> getForecast(double latitude, double longitude) {
+    Log.e("getForecast", "latitude: " + latitude + " longitude: " + longitude);
     return weatherApi.getForecast(latitude, longitude);
   }
 
