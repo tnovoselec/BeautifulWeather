@@ -1,7 +1,7 @@
 package com.tnovoselec.beautifulweather.ui;
 
 public enum IconViewEnum {
-  SUN(0), MOON(1), CLOUD(2), WIND(3);
+  SUN(0), MOON(1), CLOUD(2), WIND(3), THUNDERSTORM(4), RAIN(5), SNOW(6), MIST(7);
 
   private int value;
 

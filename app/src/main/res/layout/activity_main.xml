@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
     <com.tnovoselec.beautifulweather.ui.view.DaySectionView
-        android:id="@+id/morning_view"
+        android:id="@+id/first_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true">
@@ -13,7 +13,7 @@
     </com.tnovoselec.beautifulweather.ui.view.DaySectionView>
 
     <com.tnovoselec.beautifulweather.ui.view.DaySectionView
-        android:id="@+id/day_view"
+        android:id="@+id/second_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true">
@@ -21,7 +21,7 @@
     </com.tnovoselec.beautifulweather.ui.view.DaySectionView>
 
     <com.tnovoselec.beautifulweather.ui.view.DaySectionView
-        android:id="@+id/evening_view"
+        android:id="@+id/third_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true">
@@ -29,7 +29,7 @@
     </com.tnovoselec.beautifulweather.ui.view.DaySectionView>
 
     <com.tnovoselec.beautifulweather.ui.view.DaySectionView
-        android:id="@+id/night_view"
+        android:id="@+id/fourth_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true">

@@ -2,7 +2,7 @@ package com.tnovoselec.beautifulweather.ui;
 
 public class IconPainterFactory {
 
-  public static IconPainter createPainer(IconViewEnum iconViewEnum) {
+  public static IconPainter createPainter(IconViewEnum iconViewEnum) {
     switch (iconViewEnum) {
       case SUN:
         return new SunPainter();

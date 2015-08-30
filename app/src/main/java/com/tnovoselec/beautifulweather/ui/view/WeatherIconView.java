@@ -18,6 +18,8 @@ public class WeatherIconView extends View {
 
   private int strokeColor;
   private int bgColor;
+  private int width;
+  private int height;
 
   public WeatherIconView(Context context, AttributeSet attrs) {
     this(context, attrs, 0);
@@ -45,20 +47,23 @@ public class WeatherIconView extends View {
   @Override
   protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     super.onSizeChanged(w, h, oldw, oldh);
-    iconPainter.onSizeChanged(w, h, oldw, oldh);
+    this.width = w;
+    this.height = h;
   }
 
   @Override
   protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
-    iconPainter.paint(canvas);
-
+    if (iconPainter != null) {
+      iconPainter.paint(canvas);
+    }
     invalidate();
   }
 
   public void setIconViewEnum(IconViewEnum iconViewEnum) {
-
-    iconPainter = IconPainterFactory.createPainer(iconViewEnum);
+    iconPainter = IconPainterFactory.createPainter(iconViewEnum);
     iconPainter.init(strokeColor, bgColor);
+    iconPainter.onSizeChanged(width, height, 0, 0);
+    invalidate();
   }
 }

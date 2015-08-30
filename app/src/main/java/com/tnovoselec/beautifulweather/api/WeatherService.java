@@ -18,15 +18,13 @@ public class WeatherService {
   }
 
   private WeatherService() {
-
-
     RestAdapter restAdapter = new RestAdapter.Builder()
         .setEndpoint(BASE_URL)
         .build();
     weatherApi = restAdapter.create(WeatherApi.class);
   }
 
-  public Observable<HourlyForecast> getForecast(float latitude, float longitude) {
+  public Observable<HourlyForecast> getForecast(double latitude, double longitude) {
     return weatherApi.getForecast(latitude, longitude);
   }
 

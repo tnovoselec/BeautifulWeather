@@ -10,7 +10,7 @@ public class CloudPainter implements IconPainter {
   private int screenW, screenH;
   private float X, Y;
   private double count;
-  Cloud c;
+  Cloud cloud;
   int strokeColor;
   int bgColor;
 
@@ -41,7 +41,7 @@ public class CloudPainter implements IconPainter {
     //incrementing counter for rotation
 
     count = (count + 3.5) % 360;
-    canvas.drawPath(c.getCloud(X, Y, screenW, count), paint);
+    canvas.drawPath(cloud.getCloud(X, Y, screenW, count), paint);
   }
 
   @Override
@@ -53,6 +53,6 @@ public class CloudPainter implements IconPainter {
     X = screenW / 2;
     Y = (screenH / 2);
 
-    c = new Cloud();
+    cloud = new Cloud();
   }
 }

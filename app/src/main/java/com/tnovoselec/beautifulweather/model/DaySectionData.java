@@ -6,14 +6,14 @@ import com.tnovoselec.beautifulweather.ui.IconViewEnum;
 public class DaySectionData {
 
   private final DaySection daySection;
-  private final int temperature;
+  private final float temperature;
   private final String description;
   private final double wind;
   private final double humidity;
   private final int background;
   private final IconViewEnum iconViewEnum;
 
-  public DaySectionData(DaySection daySection, int temperature, String description, double wind, double humidity, int background, IconViewEnum iconViewEnum) {
+  public DaySectionData(DaySection daySection, float temperature, String description, double wind, double humidity, int background, IconViewEnum iconViewEnum) {
     this.daySection = daySection;
     this.temperature = temperature;
     this.description = description;
@@ -27,7 +27,7 @@ public class DaySectionData {
     return daySection;
   }
 
-  public int getTemperature() {
+  public float getTemperature() {
     return temperature;
   }
 

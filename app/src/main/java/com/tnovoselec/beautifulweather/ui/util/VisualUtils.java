@@ -1,4 +1,4 @@
-package com.tnovoselec.beautifulweather.ui.utils;
+package com.tnovoselec.beautifulweather.ui.util;
 
 import android.content.res.Resources;
 

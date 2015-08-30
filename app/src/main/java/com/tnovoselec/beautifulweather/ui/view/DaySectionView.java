@@ -17,10 +17,12 @@ import android.widget.TextView;
 
 import com.tnovoselec.beautifulweather.R;
 import com.tnovoselec.beautifulweather.model.DaySectionData;
-import com.tnovoselec.beautifulweather.ui.utils.VisualUtils;
+import com.tnovoselec.beautifulweather.ui.util.VisualUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
+import static com.tnovoselec.beautifulweather.ui.util.FormatUtils.formatDescription;
 
 public class DaySectionView extends LinearLayout {
 
@@ -86,10 +88,10 @@ public class DaySectionView extends LinearLayout {
 
   private void fillViews() {
     this.name.setText(daySectionData.getDaySection().getDescription());
-    this.description.setText(daySectionData.getDescription());
+    this.description.setText(formatDescription(daySectionData.getDescription()));
     this.temperature.setText(daySectionData.getTemperature() + "° C");
-    this.wind.setText("Wind: E " + daySectionData.getWind());
-    this.humidity.setText("Humidity: " + daySectionData.getHumidity());
+    this.wind.setText("Wind: E " + (int) daySectionData.getWind());
+    this.humidity.setText("Humidity: " + (int) daySectionData.getHumidity());
     this.setBackgroundColor(getResources().getColor(daySectionData.getBackground()));
     this.icon.setIconViewEnum(daySectionData.getIconViewEnum());
   }
