@@ -89,9 +89,9 @@ public class DaySectionView extends LinearLayout {
   private void fillViews() {
     this.name.setText(daySectionData.getDaySection().getDescription());
     this.description.setText(formatDescription(daySectionData.getDescription()));
-    this.temperature.setText(daySectionData.getTemperature() + "° C");
-    this.wind.setText("Wind: E " + (int) daySectionData.getWind());
-    this.humidity.setText("Humidity: " + (int) daySectionData.getHumidity());
+    this.temperature.setText(Math.round(daySectionData.getTemperature()) + "° C");
+    this.wind.setText("Wind: " + Math.round(daySectionData.getWind()));
+    this.humidity.setText("Humidity: " + Math.round(daySectionData.getHumidity()));
     this.setBackgroundColor(getResources().getColor(daySectionData.getBackground()));
     this.icon.setIconViewEnum(daySectionData.getIconViewEnum());
   }
