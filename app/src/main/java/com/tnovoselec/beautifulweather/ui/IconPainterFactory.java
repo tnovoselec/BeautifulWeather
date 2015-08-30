@@ -10,6 +10,10 @@ public class IconPainterFactory {
         return new MoonPainter();
       case CLOUD:
         return new CloudPainter();
+      case RAIN:
+        return new RainPainter();
+      case THUNDERSTORM:
+        return new ThunderPainter();
       default:
         throw new RuntimeException();
     }

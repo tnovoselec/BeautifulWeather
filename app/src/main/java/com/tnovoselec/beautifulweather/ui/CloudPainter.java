@@ -7,8 +7,10 @@ import android.graphics.Paint;
 public class CloudPainter implements IconPainter {
 
   private Paint paint;
-  private int screenW, screenH;
-  private float X, Y;
+  private int screenH;
+  private int screenW;
+  private float Y;
+  private float X;
   private double count;
   Cloud cloud;
   int strokeColor;
