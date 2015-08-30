@@ -2,6 +2,7 @@ package com.tnovoselec.beautifulweather.ui;
 
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -13,7 +14,10 @@ import java.util.List;
 
 public class SectionChoreographer {
 
+  private static final String TAG = SectionChoreographer.class.getSimpleName();
+
   private static final int DEFAULT_SELECTION = 0;
+  private static final int DELAY_INTERVAL = 250;
 
   private int defaultTranslationY;
 
@@ -40,6 +44,7 @@ public class SectionChoreographer {
       public boolean onPreDraw() {
         mainContainer.getViewTreeObserver().removeOnPreDrawListener(this);
         defaultTranslationY = mainContainer.getMeasuredHeight() / 2;
+        Log.e(TAG, "defaultTranslation: " + defaultTranslationY);
         setUpChildren();
         return true;
       }
@@ -71,35 +76,26 @@ public class SectionChoreographer {
 
     daySectionViews.get(currentSelection).animateIcon(index < currentSelection, true);
     final int currentCopy = currentSelection;
-    handler.postDelayed(new Runnable() {
-      @Override
-      public void run() {
+    handler.postDelayed(() -> daySectionViews.get(index).animateIcon(index < currentCopy, false), DELAY_INTERVAL);
 
-        daySectionViews.get(index).animateIcon(index < currentCopy, false);
-
-      }
-    }, 250);
-
-    handler.postDelayed(new Runnable() {
-      @Override
-      public void run() {
-        daySectionViews.get(index).animateDataContainer();
-        daySectionViews.get(currentCopy).hideDataContainer();
-      }
-    }, 500);
+    handler.postDelayed(() -> {
+      daySectionViews.get(index).animateDataContainer();
+      daySectionViews.get(currentCopy).hideDataContainer();
+    }, 2 * DELAY_INTERVAL);
     currentSelection = index;
 
   }
 
   private void shift(int from, int to, boolean up) {
     for (int i = from; i <= to; i++) {
-      float translationBy = up ? -defaultTranslationY : defaultTranslationY;
+
       DaySectionView daySectionView = daySectionViews.get(i);
+      float translationStep = i * defaultTranslationY / 3;
       daySectionView
           .animate()
-          .translationYBy(translationBy * 2 / 3)
+          .translationY(up ? translationStep : translationStep + defaultTranslationY * 2 / 3)
           .setInterpolator(new AccelerateDecelerateInterpolator())
-          .setDuration(500);
+          .setDuration(2 * DELAY_INTERVAL);
     }
   }
 

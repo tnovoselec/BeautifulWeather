@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -120,7 +119,7 @@ public class DaySectionView extends LinearLayout {
     float to = isCurrent ? up ? -icon.getHeight() : icon.getHeight() : 0;
     Interpolator interpolator = isCurrent ? accelerateInterpolator : decelerateInterpolator;
 
-    Log.e("animateIcon", "from: " + from + " to: " + to + " up: " + up + " isCurrent: " + isCurrent);
+//    Log.e("animateIcon", "from: " + from + " to: " + to + " up: " + up + " isCurrent: " + isCurrent);
 
     icon.setTranslationY(from);
     icon.setVisibility(VISIBLE);
