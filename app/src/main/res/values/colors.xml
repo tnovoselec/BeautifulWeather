@@ -5,4 +5,5 @@
     <color name="day_bg">#D89864</color>
     <color name="evening_bg">#B1695A</color>
     <color name="night_bg">#644749</color>
+    <color name="loader_bg">#B3E5FC</color>
 </resources>

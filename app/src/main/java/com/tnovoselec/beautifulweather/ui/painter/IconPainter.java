@@ -1,4 +1,4 @@
-package com.tnovoselec.beautifulweather.ui;
+package com.tnovoselec.beautifulweather.ui.painter;
 
 import android.graphics.Canvas;
 

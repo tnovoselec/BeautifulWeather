@@ -1,8 +1,10 @@
-package com.tnovoselec.beautifulweather.ui;
+package com.tnovoselec.beautifulweather.ui.painter;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+
+import com.tnovoselec.beautifulweather.ui.Cloud;
 
 public class CloudPainter implements IconPainter {
 

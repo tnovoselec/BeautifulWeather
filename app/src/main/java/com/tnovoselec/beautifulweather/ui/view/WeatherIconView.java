@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.tnovoselec.beautifulweather.R;
-import com.tnovoselec.beautifulweather.ui.IconPainter;
+import com.tnovoselec.beautifulweather.ui.painter.IconPainter;
 import com.tnovoselec.beautifulweather.ui.IconPainterFactory;
 import com.tnovoselec.beautifulweather.ui.IconViewEnum;
 
