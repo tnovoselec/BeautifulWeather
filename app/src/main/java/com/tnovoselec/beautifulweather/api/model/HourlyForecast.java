@@ -10,6 +10,9 @@ public class HourlyForecast {
   @SerializedName("list")
   private ArrayList<Forecast> forecasts;
 
+  @SerializedName("city")
+  private City city;
+
   public List<Forecast> getForecasts() {
     return forecasts;
   }
@@ -268,6 +271,18 @@ public class HourlyForecast {
       }
 
     }
+  }
+
+  public class City {
+
+    @SerializedName("id")
+    private long id;
+
+    @SerializedName("name")
+    private String name;
+
+    @SerializedName("country")
+    private String country;
   }
 
 }

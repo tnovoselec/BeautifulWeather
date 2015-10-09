@@ -31,11 +31,11 @@ import static com.tnovoselec.beautifulweather.ui.IconViewEnum.SUN;
 
 public class MainActivity extends AppCompatActivity {
 
-  @Bind(R.id.main_container)
-  ViewGroup mainContainer;
-
   @Bind(R.id.forecast_container)
   View forecastContainer;
+
+  @Bind(R.id.list_container)
+  ViewGroup listContainer;
 
   @Bind(R.id.first_view)
   DaySectionView firstView;
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onResume() {
     super.onResume();
-    loaderIcon.setIconViewEnum(SUN);
+    loaderIcon.postDelayed(() -> loaderIcon.setIconViewEnum(SUN), 100);
   }
 
   private void getData() {
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
   private void fillData(List<DaySectionData> daySectionDatas) {
     Log.e("fillData", "size: " + daySectionDatas.size());
-    sectionChoreographer = new SectionChoreographer(mainContainer, Arrays.asList(firstView, secondView, thirdView, fourthView));
+    sectionChoreographer = new SectionChoreographer(listContainer, Arrays.asList(firstView, secondView, thirdView, fourthView));
     sectionChoreographer.initialize();
 
     firstView.setDaySectionData(daySectionDatas.get(0));
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
     progressContainer
         .animate()
-        .setStartDelay(5000)
+        .setStartDelay(2000)
         .alpha(0)
         .setInterpolator(new DecelerateInterpolator())
         .withEndAction(() -> progressContainer.setVisibility(View.GONE));
