@@ -17,8 +17,8 @@ public class HourlyForecast {
     return forecasts;
   }
 
-  public void setForecasts(ArrayList<Forecast> forecasts) {
-    this.forecasts = forecasts;
+  public City getCity() {
+    return city;
   }
 
   public class Forecast {
@@ -283,6 +283,18 @@ public class HourlyForecast {
 
     @SerializedName("country")
     private String country;
+
+    public long getId() {
+      return id;
+    }
+
+    public String getName() {
+      return name;
+    }
+
+    public String getCountry() {
+      return country;
+    }
   }
 
 }

@@ -2,6 +2,8 @@ package com.tnovoselec.beautifulweather.business;
 
 import com.tnovoselec.beautifulweather.R;
 import com.tnovoselec.beautifulweather.api.model.HourlyForecast;
+import com.tnovoselec.beautifulweather.model.CityData;
+import com.tnovoselec.beautifulweather.model.DayData;
 import com.tnovoselec.beautifulweather.model.DaySection;
 import com.tnovoselec.beautifulweather.model.DaySectionData;
 import com.tnovoselec.beautifulweather.ui.IconViewEnum;
@@ -31,15 +33,15 @@ public class ModelConverter {
   private static final long HOUR_IN_MILLIS = TimeUnit.HOURS.toMillis(1);
 
 
-  public static List<DaySectionData> fromHourlyForecast(HourlyForecast hourlyForecast) {
+  public static DayData fromHourlyForecast(HourlyForecast hourlyForecast) {
     List<DaySectionData> daySections = new ArrayList<>();
     for (HourlyForecast.Forecast forecast : hourlyForecast.getForecasts()) {
       if (isMorning(forecast) || isDay(forecast) || isEvening(forecast) || isNight(forecast)) {
         daySections.add(fromForecast(forecast));
       }
     }
-
-    return daySections;
+    CityData cityData = fromCity(hourlyForecast.getCity());
+    return new DayData(cityData, daySections);
   }
 
   private static DaySectionData fromForecast(HourlyForecast.Forecast forecast) {
@@ -61,6 +63,10 @@ public class ModelConverter {
         forecast.getMain().getHumidity(),
         resolveBackground(daySection),
         resolveIconView(forecast, daySection));
+  }
+
+  private static CityData fromCity(HourlyForecast.City city){
+    return new CityData(city.getName(), city.getCountry());
   }
 
   private static boolean isMorning(HourlyForecast.Forecast forecast) {

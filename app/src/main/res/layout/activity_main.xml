@@ -48,6 +48,7 @@
             </com.tnovoselec.beautifulweather.ui.view.DaySectionView>
         </RelativeLayout>
         <TextView
+            android:id="@+id/city_name"
             android:background="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
