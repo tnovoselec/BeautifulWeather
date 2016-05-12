@@ -1,7 +1,6 @@
 package com.tnovoselec.beautifulweather.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
@@ -77,8 +76,6 @@ public class MainActivity extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
-
-    getData();
   }
 
   @Override
@@ -90,10 +87,12 @@ public class MainActivity extends BaseActivity {
   protected void onResume() {
     super.onResume();
     loaderIcon.postDelayed(() -> loaderIcon.setIconViewEnum(SUN), 100);
+    showProgress();
+    getData();
   }
 
   private void getData() {
-    Subscription subscription = locationDealer.getLastKnownLocationObservable()
+    Subscription subscription = locationDealer.getLocationUpdatesObservable()
         .flatMap(location -> weatherService.getForecast(location.getLatitude(), location.getLongitude()))
         .map(ModelConverter::fromHourlyForecast)
         .subscribeOn(Schedulers.io())
@@ -103,14 +102,13 @@ public class MainActivity extends BaseActivity {
   }
 
   @Override
-  protected void onStop() {
-    super.onStop();
+  protected void onPause() {
+    super.onPause();
     subscriptions.unsubscribe();
   }
 
   private void fillData(DayData dayData) {
     List<DaySectionData> daySectionDatas = dayData.getDaySections();
-    Log.e("fillData", "size: " + daySectionDatas.size());
     sectionChoreographer = new SectionChoreographer(listContainer, Arrays.asList(firstView, secondView, thirdView, fourthView));
     sectionChoreographer.initialize();
 
@@ -122,9 +120,20 @@ public class MainActivity extends BaseActivity {
 
     cityName.setText(dayData.getCity().getName());
 
+    hideProgress();
+  }
+
+  private void showProgress() {
     progressContainer
         .animate()
-        .setStartDelay(2000)
+        .alpha(1)
+        .setInterpolator(new DecelerateInterpolator())
+        .withStartAction(() -> progressContainer.setVisibility(View.VISIBLE));
+  }
+
+  private void hideProgress() {
+    progressContainer
+        .animate()
         .alpha(0)
         .setInterpolator(new DecelerateInterpolator())
         .withEndAction(() -> progressContainer.setVisibility(View.GONE));
