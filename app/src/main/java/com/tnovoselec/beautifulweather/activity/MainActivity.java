@@ -76,6 +76,9 @@ public class MainActivity extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
+
+    sectionChoreographer = new SectionChoreographer(listContainer, Arrays.asList(firstView, secondView, thirdView, fourthView));
+    sectionChoreographer.initialize();
   }
 
   @Override
@@ -86,6 +89,7 @@ public class MainActivity extends BaseActivity {
   @Override
   protected void onResume() {
     super.onResume();
+    subscriptions = new CompositeSubscription();
     loaderIcon.postDelayed(() -> loaderIcon.setIconViewEnum(SUN), 100);
     showProgress();
     getData();
@@ -108,14 +112,12 @@ public class MainActivity extends BaseActivity {
   }
 
   private void fillData(DayData dayData) {
-    List<DaySectionData> daySectionDatas = dayData.getDaySections();
-    sectionChoreographer = new SectionChoreographer(listContainer, Arrays.asList(firstView, secondView, thirdView, fourthView));
-    sectionChoreographer.initialize();
+    List<DaySectionData> daySections = dayData.getDaySections();
 
-    firstView.setDaySectionData(daySectionDatas.get(0));
-    secondView.setDaySectionData(daySectionDatas.get(1));
-    thirdView.setDaySectionData(daySectionDatas.get(2));
-    fourthView.setDaySectionData(daySectionDatas.get(3));
+    firstView.setDaySectionData(daySections.get(0));
+    secondView.setDaySectionData(daySections.get(1));
+    thirdView.setDaySectionData(daySections.get(2));
+    fourthView.setDaySectionData(daySections.get(3));
     forecastContainer.setVisibility(View.VISIBLE);
 
     cityName.setText(dayData.getCity().getName());

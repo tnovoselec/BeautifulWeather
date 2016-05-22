@@ -28,3 +28,4 @@ proguard/
 .idea/
 BeautifulWeather.iml
 app/app.iml
+keystore.jks

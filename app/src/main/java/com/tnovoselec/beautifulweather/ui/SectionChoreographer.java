@@ -2,7 +2,6 @@ package com.tnovoselec.beautifulweather.ui;
 
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -29,22 +28,25 @@ public class SectionChoreographer {
 
   private Handler handler = new Handler();
 
+  private boolean initialized;
+
   public SectionChoreographer(ViewGroup mainContainer, List<DaySectionView> daySectionViews) {
     this.mainContainer = mainContainer;
     this.daySectionViews = daySectionViews;
   }
 
   public void initialize() {
-    if (daySectionViews.isEmpty()) {
+    if (daySectionViews.isEmpty() || initialized) {
       return;
     }
+
+    initialized = true;
 
     mainContainer.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
       @Override
       public boolean onPreDraw() {
         mainContainer.getViewTreeObserver().removeOnPreDrawListener(this);
         defaultTranslationY = mainContainer.getMeasuredHeight() / 2;
-        Log.e(TAG, "defaultTranslation: " + defaultTranslationY);
         setUpChildren();
         return true;
       }
@@ -83,7 +85,6 @@ public class SectionChoreographer {
       daySectionViews.get(currentCopy).hideDataContainer();
     }, 2 * DELAY_INTERVAL);
     currentSelection = index;
-
   }
 
   private void shift(int from, int to, boolean up) {
@@ -98,6 +99,4 @@ public class SectionChoreographer {
           .setDuration(2 * DELAY_INTERVAL);
     }
   }
-
-
 }
