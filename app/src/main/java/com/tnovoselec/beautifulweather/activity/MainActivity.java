@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.tnovoselec.beautifulweather.R;
 import com.tnovoselec.beautifulweather.api.WeatherService;
+import com.tnovoselec.beautifulweather.business.CityNameDealer;
 import com.tnovoselec.beautifulweather.business.LocationDealer;
 import com.tnovoselec.beautifulweather.business.ModelConverter;
 import com.tnovoselec.beautifulweather.di.ActivityComponent;
@@ -67,6 +68,9 @@ public class MainActivity extends BaseActivity {
   @Inject
   LocationDealer locationDealer;
 
+  @Inject
+  CityNameDealer cityNameDealer;
+
   private CompositeSubscription subscriptions = new CompositeSubscription();
 
   private SectionChoreographer sectionChoreographer;
@@ -97,7 +101,8 @@ public class MainActivity extends BaseActivity {
 
   private void getData() {
     Subscription subscription = locationDealer.getLocationUpdatesObservable()
-        .flatMap(location -> weatherService.getForecast(location.getLatitude(), location.getLongitude()))
+        .flatMap(location -> cityNameDealer.getCityName(location))
+        .flatMap(location -> weatherService.getForecast(location))
         .map(ModelConverter::fromHourlyForecast)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

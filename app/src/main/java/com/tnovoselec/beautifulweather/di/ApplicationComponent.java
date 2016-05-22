@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.tnovoselec.beautifulweather.BeautifulWeatherApplication;
 import com.tnovoselec.beautifulweather.api.WeatherService;
+import com.tnovoselec.beautifulweather.business.CityNameDealer;
 import com.tnovoselec.beautifulweather.business.LocationDealer;
 import com.tnovoselec.beautifulweather.di.module.ApplicationModule;
 import com.tnovoselec.beautifulweather.di.module.LocationModule;
@@ -45,6 +46,8 @@ public interface ApplicationComponent {
   WeatherService weatherService();
 
   LocationDealer locationDealer();
+
+  CityNameDealer cityNameDealer();
 
   void inject(BeautifulWeatherApplication commerceApplication);
 

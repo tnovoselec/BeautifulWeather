@@ -14,9 +14,13 @@ public class WeatherService {
     this.weatherApi = weatherApi;
   }
 
-  public Observable<HourlyForecast> getForecast(double latitude, double longitude) {
-    Log.e("getForecast", "latitude: " + latitude + " longitude: " + longitude);
-    return weatherApi.getForecast(latitude, longitude);
+//  public Observable<HourlyForecast> getForecast(double latitude, double longitude) {
+//    Log.e("getForecast", "latitude: " + latitude + " longitude: " + longitude);
+//    return weatherApi.getForecast(latitude, longitude);
+//  }
+
+  public Observable<HourlyForecast> getForecast(String cityName) {
+    return weatherApi.getForecast(cityName);
   }
 
 }

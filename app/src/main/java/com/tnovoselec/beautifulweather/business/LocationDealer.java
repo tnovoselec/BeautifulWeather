@@ -23,7 +23,9 @@ public class LocationDealer {
   }
 
   public Observable<Location> getLocationUpdatesObservable(){
-    locationUpdatesObservable = locationProvider.getUpdatedLocation(new LocationRequest());
+    LocationRequest locationRequest = new LocationRequest();
+    locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    locationUpdatesObservable = locationProvider.getUpdatedLocation(locationRequest);
     return locationUpdatesObservable;
   }
 
