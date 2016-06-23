@@ -101,13 +101,13 @@ public class MainActivity extends BaseActivity {
 
   private void getData() {
     Subscription subscription = locationDealer.getLocationUpdatesObservable()
-        .flatMap(location -> cityNameDealer.getCityName(location))
-        .flatMap(location -> weatherService.getForecast(location))
-        .map(ModelConverter::fromHourlyForecast)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(MainActivity.this::fillData, Throwable::printStackTrace);
-    subscriptions.add(subscription);
+      .flatMap(location -> cityNameDealer.getCityName(location))
+      .flatMap(location -> weatherService.getForecast(location))
+      .map(ModelConverter::fromHourlyForecast)
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribe(MainActivity.this::fillData, Throwable::printStackTrace);
+    addSubscription(subscription);
   }
 
   @Override
@@ -132,22 +132,29 @@ public class MainActivity extends BaseActivity {
 
   private void showProgress() {
     progressContainer
-        .animate()
-        .alpha(1)
-        .setInterpolator(new DecelerateInterpolator())
-        .withStartAction(() -> progressContainer.setVisibility(View.VISIBLE));
+      .animate()
+      .alpha(1)
+      .setInterpolator(new DecelerateInterpolator())
+      .withStartAction(() -> progressContainer.setVisibility(View.VISIBLE));
   }
 
   private void hideProgress() {
     progressContainer
-        .animate()
-        .alpha(0)
-        .setInterpolator(new DecelerateInterpolator())
-        .withEndAction(() -> progressContainer.setVisibility(View.GONE));
+      .animate()
+      .alpha(0)
+      .setInterpolator(new DecelerateInterpolator())
+      .withEndAction(() -> progressContainer.setVisibility(View.GONE));
   }
 
   @OnClick({R.id.first_view, R.id.second_view, R.id.third_view, R.id.fourth_view})
   public void onSectionClick(View sectionView) {
     sectionChoreographer.onSectionClicked(sectionView);
+  }
+
+  private void addSubscription(Subscription subscription) {
+    if (subscriptions == null || subscriptions.isUnsubscribed()) {
+      subscriptions = new CompositeSubscription();
+    }
+    subscriptions.add(subscription);
   }
 }
