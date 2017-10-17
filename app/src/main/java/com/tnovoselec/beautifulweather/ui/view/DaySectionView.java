@@ -1,5 +1,11 @@
 package com.tnovoselec.beautifulweather.ui.view;
 
+import static com.tnovoselec.beautifulweather.ui.util.FormatUtils.formatDescription;
+
+import com.tnovoselec.beautifulweather.R;
+import com.tnovoselec.beautifulweather.model.DaySectionData;
+import com.tnovoselec.beautifulweather.ui.util.VisualUtils;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
@@ -13,37 +19,30 @@ import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.tnovoselec.beautifulweather.R;
-import com.tnovoselec.beautifulweather.model.DaySectionData;
-import com.tnovoselec.beautifulweather.ui.util.VisualUtils;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.tnovoselec.beautifulweather.ui.util.FormatUtils.formatDescription;
 
 public class DaySectionView extends LinearLayout {
 
-  @Bind(R.id.day_section_name)
+  @BindView(R.id.day_section_name)
   TextView name;
 
-  @Bind(R.id.day_section_description)
+  @BindView(R.id.day_section_description)
   TextView description;
 
-  @Bind(R.id.day_section_temperature)
+  @BindView(R.id.day_section_temperature)
   TextView temperature;
 
-  @Bind(R.id.day_section_wind)
+  @BindView(R.id.day_section_wind)
   TextView wind;
 
-  @Bind(R.id.day_section_humidity)
+  @BindView(R.id.day_section_humidity)
   TextView humidity;
 
-  @Bind(R.id.day_section_icon)
+  @BindView(R.id.day_section_icon)
   WeatherIconView icon;
 
-  @Bind(R.id.animation_data_container)
+  @BindView(R.id.animation_data_container)
   View animationDataContainer;
 
   private DaySectionData daySectionData;

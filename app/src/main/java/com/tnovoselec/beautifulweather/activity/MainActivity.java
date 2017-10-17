@@ -30,7 +30,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscription;
@@ -42,31 +42,31 @@ public class MainActivity extends BaseActivity {
 
   private static final int LOCATION_PERMISSION_REQUEST = 123;
 
-  @Bind(R.id.forecast_container)
+  @BindView(R.id.forecast_container)
   View forecastContainer;
 
-  @Bind(R.id.list_container)
+  @BindView(R.id.list_container)
   ViewGroup listContainer;
 
-  @Bind(R.id.first_view)
+  @BindView(R.id.first_view)
   DaySectionView firstView;
 
-  @Bind(R.id.second_view)
+  @BindView(R.id.second_view)
   DaySectionView secondView;
 
-  @Bind(R.id.third_view)
+  @BindView(R.id.third_view)
   DaySectionView thirdView;
 
-  @Bind(R.id.fourth_view)
+  @BindView(R.id.fourth_view)
   DaySectionView fourthView;
 
-  @Bind(R.id.progress_container)
+  @BindView(R.id.progress_container)
   View progressContainer;
 
-  @Bind(R.id.loader_icon)
+  @BindView(R.id.loader_icon)
   WeatherIconView loaderIcon;
 
-  @Bind(R.id.city_name)
+  @BindView(R.id.city_name)
   TextView cityName;
 
   @Inject
@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    ButterKnife.bind(this);
+    ButterKnife.bind(this, this);
 
     sectionChoreographer = new SectionChoreographer(listContainer,
         Arrays.asList(firstView, secondView, thirdView, fourthView));
@@ -111,8 +111,8 @@ public class MainActivity extends BaseActivity {
     if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
         != PackageManager.PERMISSION_GRANTED) {
 
-        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
-            LOCATION_PERMISSION_REQUEST);
+      ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+          LOCATION_PERMISSION_REQUEST);
 
     } else {
       Subscription subscription = locationDealer.getLocationUpdatesObservable()

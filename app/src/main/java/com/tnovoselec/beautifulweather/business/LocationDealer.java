@@ -1,9 +1,8 @@
 package com.tnovoselec.beautifulweather.business;
 
-import android.location.Location;
-
 import com.google.android.gms.location.LocationRequest;
 
+import android.location.Location;
 import pl.charmas.android.reactivelocation.ReactiveLocationProvider;
 import rx.Observable;
 
