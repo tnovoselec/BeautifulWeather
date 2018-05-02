@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "37655042458",
+    "firebase_url": "https://beautifulweather-75c98.firebaseio.com",
+    "project_id": "beautifulweather-75c98",
+    "storage_bucket": "beautifulweather-75c98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37655042458:android:5497ee7181be1100",
+        "android_client_info": {
+          "package_name": "com.tnovoselec.beautifulweather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37655042458-mahfutq614o3a1b9o0l644d1r8kurglu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmwc0r4AidsVe8WB--MP7kslra2YDcpRI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
