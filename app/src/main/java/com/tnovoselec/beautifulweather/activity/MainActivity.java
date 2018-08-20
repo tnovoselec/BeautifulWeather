@@ -1,6 +1,10 @@
 package com.tnovoselec.beautifulweather.activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +25,7 @@ import com.tnovoselec.beautifulweather.ui.view.WeatherIconView;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscription;
@@ -33,31 +37,33 @@ import static com.tnovoselec.beautifulweather.ui.IconViewEnum.SUN;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Bind(R.id.forecast_container)
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
+    @BindView(R.id.forecast_container)
     View forecastContainer;
 
-    @Bind(R.id.list_container)
+    @BindView(R.id.list_container)
     ViewGroup listContainer;
 
-    @Bind(R.id.first_view)
+    @BindView(R.id.first_view)
     DaySectionView firstView;
 
-    @Bind(R.id.second_view)
+    @BindView(R.id.second_view)
     DaySectionView secondView;
 
-    @Bind(R.id.third_view)
+    @BindView(R.id.third_view)
     DaySectionView thirdView;
 
-    @Bind(R.id.fourth_view)
+    @BindView(R.id.fourth_view)
     DaySectionView fourthView;
 
-    @Bind(R.id.progress_container)
+    @BindView(R.id.progress_container)
     View progressContainer;
 
-    @Bind(R.id.loader_icon)
+    @BindView(R.id.loader_icon)
     WeatherIconView loaderIcon;
 
-    @Bind(R.id.city_name)
+    @BindView(R.id.city_name)
     TextView cityName;
 
     private WeatherService weatherService = WeatherService.getInstance();
@@ -74,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        getData();
+        checkLocationPermission();
     }
 
     @Override
@@ -85,11 +91,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void getData() {
         Subscription subscription = locationDealer.getLastKnownLocationObservable()
-                .flatMap(location -> weatherService.getForecast(location.getLatitude(), location.getLongitude()))
-                .map(ModelConverter::fromHourlyForecast)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(MainActivity.this::fillData, Throwable::printStackTrace);
+                                                  .flatMap(location -> weatherService.getForecast(location.getLatitude(), location.getLongitude()))
+                                                  .map(ModelConverter::fromHourlyForecast)
+                                                  .subscribeOn(Schedulers.io())
+                                                  .observeOn(AndroidSchedulers.mainThread())
+                                                  .subscribe(MainActivity.this::fillData, Throwable::printStackTrace);
         subscriptions.add(subscription);
     }
 
@@ -124,5 +130,33 @@ public class MainActivity extends AppCompatActivity {
     @OnClick({R.id.first_view, R.id.second_view, R.id.third_view, R.id.fourth_view})
     public void onSectionClick(View sectionView) {
         sectionChoreographer.onSectionClicked(sectionView);
+    }
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                                              new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                              MY_PERMISSIONS_REQUEST_LOCATION);
+            return false;
+        } else {
+            getData();
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                        getData();
+                    }
+                }
+            }
+        }
     }
 }

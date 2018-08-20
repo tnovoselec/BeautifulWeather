@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/loader_bg"
-        android:visibility="gone">
+        android:visibility="visible">
         <com.tnovoselec.beautifulweather.ui.view.WeatherIconView
             android:id="@+id/loader_icon"
             android:layout_width="300dp"

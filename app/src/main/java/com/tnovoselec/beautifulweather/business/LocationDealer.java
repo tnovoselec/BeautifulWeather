@@ -13,7 +13,6 @@ public class LocationDealer {
 
   private ReactiveLocationProvider locationProvider;
   private Observable<Location> lastKnownLocationObservable;
-  private Observable<Location> locationUpdatesObservable;
 
   public static LocationDealer getInstance(){
     return INSTANCE;
